@@ -33,7 +33,8 @@ const searchbar = () => {
         try {
             setisLoading(true);
             //Scrape the product
-            const product = await scrapeAndStoreProduct
+            const product = await scrapeAndStoreProduct(searchPrompt);
+            
         } catch (error) {
           console.log(error);
           
