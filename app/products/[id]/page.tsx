@@ -1,4 +1,6 @@
 import { getProductById } from "@/lib/actions"
+import { formatNumber } from "@/lib/utils";
+import { Product } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -8,7 +10,7 @@ type Props={
 }
 
 const ProductDetails = async ({params:{id}}: Props) => {
-const product = await getProductById(id);
+const product: Product = await getProductById(id);
 
 if(!product) redirect('/')
 
@@ -37,8 +39,42 @@ if(!product) redirect('/')
                 Visit Product
               </Link>
             </div>
+              <div className="flex items-center gap-3">
+                <div className="product-hearts">
+                  <Image 
+                  src="/assetsicons/red-heart.svg" 
+                  alt="heart"
+                  width={20}
+                  height={20}
+                  />
+                  <p className="text-base font-semibold text-[#D46F77]">
+                    {product.reviewsCount}
+                  </p>
+                </div>
+                <div className="p-2 bg-white-200 rounded-10">
+                  <Image
+                    src="/assets/icons/bookmark.svg"
+                    alt="bookmark"
+                    width={20}
+                    height={20}
+                  />
+                </div>
 
-            
+                <div className="p-2 bg-white-200 rounded-10">
+                  <Image
+                    src="/assets/icons/share.svg"
+                    alt="share"
+                    width={20}
+                    height={20}
+                  />
+                </div>
+              </div>
+          </div>
+          <div className="product-info">
+            <div className="flex flex-col gapp-2">
+              <p className="text-[34p] text-secondary font-bold">
+                {product.currency}{formatNumber(product.currentPrice)}</p>
+            </div>
           </div>
         </div>
       </div>
