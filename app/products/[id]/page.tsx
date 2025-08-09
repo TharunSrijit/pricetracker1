@@ -9,6 +9,7 @@ type Props={
   params:{id:string}
 }
 
+
 const ProductDetails = async ({params:{id}}: Props) => {
 const product: Product = await getProductById(id);
 
