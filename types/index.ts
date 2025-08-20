@@ -2,6 +2,7 @@ export type PriceHistoryItem = {
   price: number;
 };
 
+
 export type User = {
   email: string;
 };
