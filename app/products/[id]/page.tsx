@@ -181,4 +181,5 @@ if(!product) redirect('/')
   )
 }
 
+
 export default ProductDetails
