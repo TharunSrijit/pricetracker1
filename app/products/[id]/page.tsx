@@ -1,5 +1,6 @@
 import PriceInfoCard from "@/Components/PriceInfoCard";
-import { getProductById } from "@/lib/actions"
+import ProductCard from "@/Components/ProductCard";
+import { getProductById, getSimilarProducts } from "@/lib/actions"
 import { formatNumber } from "@/lib/utils";
 import { Product } from "@/types";
 import Image from "next/image";
@@ -15,6 +16,8 @@ const ProductDetails = async ({params:{id}}: Props) => {
 const product: Product = await getProductById(id);
 
 if(!product) redirect('/')
+
+  const similarProducts = await getSimilarProducts(id);
 
   return (
     <div className="product-container">
@@ -116,12 +119,64 @@ if(!product) redirect('/')
                 title="Current Price"
                 iconSrc="/assets/icons/price-tag.svg"
                 value={`${product.currency} ${formatNumber(product.currentPrice)}`}
-                borderColor="b6dbff"
+              />
+              <PriceInfoCard
+                title="Average Price"
+                iconSrc="/assets/icons/chart.svg"
+                value={`${product.currency} ${formatNumber(product.averagePrice)}`}
+              />
+              <PriceInfoCard
+                title="highest Price"
+                iconSrc="/assets/icons/arrow-up.svg"
+                value={`${product.currency} ${formatNumber(product.highestPrice)}`}
+              />
+              <PriceInfoCard
+                title="Current Price"
+                iconSrc="/assets/icons/arrow-down.svg"
+                value={`${product.currency} ${formatNumber(product.lowestPrice)}`}
               />
             </div>
           </div>
+          Modal
+
         </div>
       </div>
+
+      <div className="flex felx-col gap-16">
+        <div className="flex flex-col gap-5">
+          <h3 className="text-2xl text-secondary font-semibold">
+            product description
+          </h3>
+
+          <div className="flex felx-col gap-4">
+            {product?.description?.split('\n')}
+          </div>
+        </div>
+        <button className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px]">
+          <Image
+            src="/assets/icons/bag.svg"
+            alt="check"
+            width={22}
+            height={22}
+          />
+
+          <Link href="/" className="text-base text-white"> \
+            buy now
+          </Link>
+
+        </button>
+      </div>
+      {similarProducts && similarProducts?.length > 0 &&(
+        <div className="py-14 flex felx-col gap-2 w-full">
+          <p className="section-text">Similar products</p>
+
+          <div className="flx flex-wrap gap-10 mt-7 w-full">
+            {similarProducts.map((product) =>
+              <ProductCard key={product._id} product={product}/>
+            )}
+          </div>
+        </div>
+      )}
       </div>
   )
 }
