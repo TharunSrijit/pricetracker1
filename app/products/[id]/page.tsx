@@ -1,3 +1,4 @@
+import Modal from "@/Components/Modal";
 import PriceInfoCard from "@/Components/PriceInfoCard";
 import ProductCard from "@/Components/ProductCard";
 import { getProductById, getSimilarProducts } from "@/lib/actions"
@@ -126,7 +127,7 @@ if(!product) redirect('/')
                 value={`${product.currency} ${formatNumber(product.averagePrice)}`}
               />
               <PriceInfoCard
-                title="highest Price"
+                title="Highest Price"
                 iconSrc="/assets/icons/arrow-up.svg"
                 value={`${product.currency} ${formatNumber(product.highestPrice)}`}
               />
@@ -137,7 +138,7 @@ if(!product) redirect('/')
               />
             </div>
           </div>
-          Modal
+          <Modal/>
 
         </div>
       </div>
