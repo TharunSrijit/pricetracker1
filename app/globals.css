@@ -9,7 +9,7 @@
   scroll-behavior: smooth;
 }
 
-@layer base {
+@layer components {
   body {
     @apply font-inter;
   }
