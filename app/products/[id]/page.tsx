@@ -149,9 +149,11 @@ if(!product) redirect('/')
             product description
           </h3>
 
+{/* 
           <div className="flex felx-col gap-4">
             {product?.description?.split('\n')}
-          </div>
+          </div>*/}
+
         </div>
         <button className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px]">
           <Image
